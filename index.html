@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="ICPGameJam2024">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta charset="utf-8">
+
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <link rel="icon" href="appresources/img/favicon.ico">
+
+    <title>Dungeon Looters - ICP GameJam 2024</title>
+
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.2.min.js"></script>
+
+    <script src="appresources/js/aframemaster.js"></script>
+
+      <script src="appresources/js/aframearnft.js"></script>
+
+    <script src="appresources/js/aframe-multisrc-component.js"></script>
+     <script src="appresources/js/gestures.js"></script>
+     <script src="appresources/js/lookat.js"></script>
+
+
+
+</head>
+
+<body style="margin:0; padding:0; border:0; overflow: hidden; width:100vw; height:100vh;">
+    
+    
+   <button type="button" id="messageBtn"> </button>
+
+<script>
+
+    function showThePlace()
+    {
+            // alert("itworksmadafaka!");
+    }
+    
+    var gamers = gamers === 0 || undefined === gamers ? 0 : gamers++;
+    
+    var entries = entries === 0 || undefined === gamers ? 0 : entries++; 
+    
+    var pubnub = new PubNub({
+            publishKey: 'pub-c-42d341c2-81c7-4da9-91f9-20060502aeff',
+            subscribeKey: 'sub-c-c766b680-d4a3-496c-ab33-91472e5af0af',
+            userId: "" + Math.random()
+        })
+        
+        pubnub.subscribe({
+            channels: ['ws-channel']
+        })
+        
+        pubnub.addListener({
+            message: payload => {
+            
+                
+                /* if (payload.message === "newGamer") 
+                { 
+                    gamers++ 
+                    entries++
+                }
+                else{ gamers-- }
+                
+                if (gamers < 2 && entries > 1) { window.location ="https://optimaljoe.com/gamejam/youwin.html"; } */
+                
+                if (payload.message === "MURICION") { oneDeath = 1; }
+                
+            } 
+            
+            
+        });
+        
+        
+        pubnub.hereNow(
+                { 
+                  channels: ["ws-channel"], includeState: true },
+                  function (status, response) 
+                  {
+                    console.log("MMMMMMMMM: ", response.totalOccupancy);
+                    
+                    if ( response.totalOccupancy < 3)
+                    { 
+                        window.location ="https://optimaljoe.com/gamejam/youwin.html";
+                    }
+                    
+                  }
+                );
+        
+        
+        
+        
+        
+
+</script>
+
+<a-scene
+        vr-mode-ui="enabled:false;"
+        arjs="sourceType:webcam; debugUIEnabled:false;"
+        embedded
+        renderer="logarithmicDepthBuffer: true;"
+        gesture-detector
+        id="scene">
+
+    <a-assets>
+
+         <img id="cube1right" src="appresources/img/GameJam_1.jpg">
+         <img id="cube1left" src="appresources/img/GameJam_9.jpg">
+         <img id="cube1top" src="appresources/img/GameJam_3.jpg">
+         <img id="cube1bottom" src="appresources/img/GameJam_12.jpg">
+         <img id="cube1front" src="appresources/img/GameJam_5.jpg">
+         <img id="cube1back" src="appresources/img/GameJam_13.jpg">
+
+         <img id="cube2right" src="appresources/img/GameJam_3.jpg">
+         <img id="cube2left" src="appresources/img/GameJam_9.jpg">
+         <img id="cube2top" src="appresources/img/GameJam_14.jpg">
+         <img id="cube2bottom" src="appresources/GameJam_16.jpg">
+         <img id="cube2front" src="appresources/img/GameJam_9.jpg">
+         <img id="cube2back" src="appresources/img/GameJam_6.jpg">
+         
+         <img id="cube3right" src="appresources/img/GameJam_4.jpg">
+         <img id="cube3left" src="appresources/img/GameJam_9.jpg">
+         <img id="cube3top" src="appresources/img/GameJam_3.jpg">
+         <img id="cube3bottom" src="appresources/GameJam_8.jpg">
+         <img id="cube3front" src="appresources/img/GameJam_12.jpg">
+         <img id="cube3back" src="appresources/img/GameJam_13.jpg">
+         
+         <img id="cube4right" src="appresources/img/GameJam_13.jpg">
+         <img id="cube4left" src="appresources/img/GameJam_4.jpg">
+         <img id="cube4top" src="appresources/img/GameJam_14.jpg">
+         <img id="cube4bottom" src="appresources/GameJam_1.jpg">
+         <img id="cube4front" src="appresources/img/GameJam_2.jpg">
+         <img id="cube4back" src="appresources/img/GameJam_7.jpg">
+         
+         <img id="cube5right" src="appresources/img/GameJam_7.jpg">
+         <img id="cube5left" src="appresources/img/GameJam_9.jpg">
+         <img id="cube5top" src="appresources/img/GameJam_14.jpg">
+         <img id="cube5bottom" src="appresources/GameJam_16.jpg">
+         <img id="cube5front" src="appresources/img/GameJam_1.jpg">
+         <img id="cube5back" src="appresources/img/GameJam_5.jpg">
+         
+         <img id="cube6right" src="appresources/img/GameJam_2.jpg">
+         <img id="cube6left" src="appresources/img/GameJam_9.jpg">
+         <img id="cube6top" src="appresources/img/GameJam_14.jpg">
+         <img id="cube6bottom" src="appresources/GameJam_16.jpg">
+         <img id="cube6front" src="appresources/img/GameJam_9.jpg">
+         <img id="cube6back" src="appresources/img/GameJam_13.jpg">
+         
+         <img id="cube7right" src="appresources/img/GameJam_10.jpg">
+         <img id="cube7left" src="appresources/img/GameJam_10.jpg">
+         <img id="cube7top" src="appresources/img/GameJam_10.jpg">
+         <img id="cube7bottom" src="appresources/GameJam_10.jpg">
+         <img id="cube7front" src="appresources/img/GameJam_10.jpg">
+         <img id="cube7back" src="appresources/img/GameJam_6.jpg">
+         
+         <img id="cube8right" src="appresources/img/GameJam_7.jpg">
+         <img id="cube8left" src="appresources/img/GameJam_12.jpg">
+         <img id="cube8top" src="appresources/img/GameJam_11.jpg">
+         <img id="cube8bottom" src="appresources/GameJam_12.jpg">
+         <img id="cube8front" src="appresources/img/GameJam_11.jpg">
+         <img id="cube8back" src="appresources/img/GameJam_6.jpg">
+
+    </a-assets>
+
+    <!-- Using the asset management system.  width="16" height="9" -->
+    <!-- <a-video src="#video" style="width:200px; height:60px;" position="0 0 -5"></a-video>    -->
+
+
+
+    <a-marker
+            preset="hiro"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerA"
+            data-death="10"
+            data-damage="10"
+            class="oneOfTheMarkers">
+        <a-box
+                position="0 0 0"
+                multisrc="srcs:#cube1right,#cube1left,#cube1top,#cube1bottom,#cube1front,#cube1back"
+                scale="0.7 0.7 0.7"
+                class="clickable"
+                gesture-handler
+                onclick="showThePlace();"
+                id="foooA">
+        </a-box>
+    </a-marker>
+    
+    
+    <a-marker
+            type="pattern"
+            url="https://optimaljoe.com/gamejam/data/letterA.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerB"
+            data-death="50"
+            data-damage="80"
+            class="oneOfTheMarkers">
+        <a-box
+                position="0 0 0"
+                multisrc="srcs:#cube2right,#cube2left,#cube2top,#cube2bottom,#cube2front,#cube2back"
+                scale="0.7 0.7 0.7"
+                class="clickable"
+                gesture-handler
+                onclick="showThePlace();"
+                id="foooB">
+        </a-box>
+    </a-marker>
+    
+    
+    
+    <a-marker
+            type="pattern"
+            url="https://optimaljoe.com/gamejam/data/letterB.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerB"
+            data-death="20"
+            data-damage="10"
+            class="oneOfTheMarkers">
+        <a-box
+                position="0 0 0"
+                multisrc="srcs:#cube3right,#cube3left,#cube3top,#cube3bottom,#cube3front,#cube3back"
+                scale="0.7 0.7 0.7"
+                class="clickable"
+                gesture-handler
+                onclick="showThePlace();"
+                id="foooC">
+        </a-box>
+    </a-marker>
+    
+    <a-marker
+            type="pattern"
+            url="https://optimaljoe.com/gamejam/data/letterC.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerB"
+            data-death="90"
+            data-damage="800"
+            class="oneOfTheMarkers">
+        <a-box
+                position="0 0 0"
+                multisrc="srcs:#cube4right,#cube4left,#cube4top,#cube4bottom,#cube4front,#cube4back"
+                scale="0.7 0.7 0.7"
+                class="clickable"
+                gesture-handler
+                onclick="showThePlace();"
+                id="foooD">
+        </a-box>
+    </a-marker>
+    
+    <a-marker
+            type="pattern"
+            url="https://optimaljoe.com/gamejam/data/letterD.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerB"
+            data-death="30"
+            data-damage="15"
+            class="oneOfTheMarkers">
+        <a-box
+                position="0 0 0"
+                multisrc="srcs:#cube5right,#cube5left,#cube5top,#cube5bottom,#cube5front,#cube5back"
+                scale="0.7 0.7 0.7"
+                class="clickable"
+                gesture-handler
+                onclick="showThePlace();"
+                id="foooE">
+        </a-box>
+    </a-marker>
+    
+    <a-marker
+            type="pattern"
+            url="https://optimaljoe.com/gamejam/data/letterF.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerB"
+            data-death="60"
+            data-damage="20"
+            class="oneOfTheMarkers">
+        <a-box
+                position="0 0 0"
+                multisrc="srcs:#cube6right,#cube6left,#cube6top,#cube6bottom,#cube6front,#cube6back"
+                scale="0.7 0.7 0.7"
+                class="clickable"
+                gesture-handler
+                onclick="showThePlace();"
+                id="foooF">
+        </a-box>
+    </a-marker>
+    
+    <a-marker
+            type="pattern"
+            url="https://optimaljoe.com/gamejam/data/letterG.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerB"
+            data-death="10"
+            data-damage="80"
+            class="oneOfTheMarkers">
+        <a-box
+                position="0 0 0"
+                multisrc="srcs:#cube7right,#cube7left,#cube7top,#cube7bottom,#cube7front,#cube7back"
+                scale="0.7 0.7 0.7"
+                class="clickable"
+                gesture-handler
+                onclick="showThePlace();"
+                id="foooG">
+        </a-box>
+    </a-marker>
+    
+    <a-marker
+            type="pattern"
+            url="https://optimaljoe.com/gamejam/data/barcode05.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerB"
+            data-death="90"
+            data-damage="80"
+            class="oneOfTheMarkers">
+        <a-box
+                position="0 0 0"
+                multisrc="srcs:#cube8right,#cube8left,#cube8top,#cube8bottom,#cube8front,#cube8back"
+                scale="0.7 0.7 0.7"
+                class="clickable"
+                gesture-handler
+                onclick="showThePlace();"
+                id="foooH">
+        </a-box>
+    </a-marker>
+
+
+
+
+
+
+    <a-camera id="theCamera" look-controls="enabled:false"  rotation-reader>   <!-- gps-camera  -->
+        <!-- <a-cursor></a-cursor> -->
+    </a-camera>
+
+
+
+</a-scene>
+
+<script>
+
+
+function giveMeLuck(requestedProb)
+{
+    requestedProb = parseInt(requestedProb);
+    
+    if (requestedProb < 10) { requestedProb = 10; }
+    
+    let probDiff = 100 - requestedProb;
+    let probField = [];
+    let randomNumber = Math.floor( Math.random() * 100 );
+    
+    for (i=0; i<100; i++)
+    {
+        if (i<probDiff){ probField[i] = 1; }
+        else { probField[i] = 0; }
+    }
+    
+    return probField[randomNumber];
+}
+
+
+window.onload = function ()
+{
+    
+    var MyScore = 10;
+        
+        function sendMessage(theMessage) {
+            pubnub.publish({
+                channel: 'ws-channel',
+                message: theMessage
+            }) 
+        } 
+        
+        
+        
+      
+      
+      const theMarkers = document.querySelectorAll('.oneOfTheMarkers');
+      
+      theMarkers.forEach((element) => 
+      {
+          element.addEventListener('markerFound', (e) => { 
+            setTimeout(() => {
+                
+                let theLuck = giveMeLuck(e.target.getAttribute('data-death'));
+                if(theLuck === 1) 
+                { 
+                    MyScore = MyScore + parseInt(e.target.getAttribute('data-damage'));
+                    console.log("BUENA! ", MyScore);
+                    
+                    pubnub.hereNow(
+                { 
+                  channels: ["ws-channel"], includeState: true },
+                  function (status, response) 
+                  {
+                    console.log("MMMMMMMMM: ", response.totalOccupancy);
+                    
+                    if ( response.totalOccupancy < 3 )
+                    { 
+                        window.location ="https://optimaljoe.com/gamejam/youwin.html";
+                    }
+                    
+                  }
+                );
+                }
+                else
+                {
+                    MyScore = MyScore - parseInt(e.target.getAttribute('data-damage'));
+                    console.log("ITAI! ", MyScore);
+                    
+                    pubnub.hereNow(
+                { 
+                  channels: ["ws-channel"], includeState: true },
+                  function (status, response) 
+                  {
+                    console.log("MMMMMMMMM: ", response.totalOccupancy);
+                    
+                    if ( response.totalOccupancy < 3)
+                    { 
+                        window.location ="https://optimaljoe.com/gamejam/youwin.html";
+                    }
+                    
+                  }
+                );
+                }
+                
+                if (MyScore < 1) 
+                { 
+                    sendMessage("MURICION");
+                    window.location = "https://optimaljoe.com/gamejam/youdied.html"; 
+                    console.log("MEFUI! ", MyScore);
+                }
+              
+            }, 3000);
+
+          });
+
+          element.addEventListener('markerLost', (e) => { 
+              
+          });
+      });
+
+};
+</script>
+
+</body>
+</html>

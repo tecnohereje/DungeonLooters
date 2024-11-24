@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mejor suerte la próxima!</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            color: white;
+            font-weight: bold;
+            font-size: 42px;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #volverButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: skyblue;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #volverButton:hover {
+            background-color: deepskyblue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        Mejor suerte la próxima!
+    </div>
+    <button id="volverButton" onclick="window.history.back();">Volver</button>
+</body>
+</html>
